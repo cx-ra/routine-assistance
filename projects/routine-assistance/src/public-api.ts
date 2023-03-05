@@ -1,0 +1,1 @@
+export { CXraDestroyEventEmitter } from './lib/destroy-event.emitter';

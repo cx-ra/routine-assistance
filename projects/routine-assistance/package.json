@@ -1,0 +1,22 @@
+{
+	"name": "@cxra/routine-assistance",
+	"version": "0.1.0",
+	"description": "RA (Routine Assistance).",
+	"author": "coo.x63",
+	"keywords": [
+		"routine",
+		"assistance",
+		"module"
+	],
+	"dependencies": {
+		"tslib": "^2.0.0"
+	},
+	"devDependencies": {
+		"@angular/common": "^14.0.0",
+		"@angular/compiler": "^14.0.0",
+		"@angular/core": "^14.0.0",
+		"@angular/cdk": "^14.0.0",
+		"rxjs": "~6.6.0",
+		"zone.js": "~0.11.4"
+	}
+}
