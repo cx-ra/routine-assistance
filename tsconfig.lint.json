@@ -1,6 +1,7 @@
 {
 	"extends": "./tsconfig.json",
 	"include": [
-		"./projects/routine-assistance/src/**/*"
+		"./projects/routine-assistance/src/**/*",
+		"./projects/module-navigator/src/**/*"
 	]
 }

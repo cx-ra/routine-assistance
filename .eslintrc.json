@@ -318,7 +318,7 @@
 				],
 				"rxjs/no-unsafe-catch": "error",
 				"rxjs/prefer-observer": "error",
-				"rxjs/no-subclass": "error",
+				"rxjs/no-subclass": "off",
 				// правила eslint
 				"max-len": ["error", { "code": 160, "ignoreComments": true, "ignoreTrailingComments": true,"ignoreRegExpLiterals": true,
 					"ignorePattern": "^import" }],

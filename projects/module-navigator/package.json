@@ -1,0 +1,16 @@
+{
+	"name": "@cxra/module-federation-navigator",
+	"version": "0.2.4",
+	"description": "RA (Routine Assistance). This library is designed to: Automate not only the management of modules through the configuration file, but also the management of navigation to these modules and their availability for different execution contexts",
+	"author": "coo.x63",
+	"keywords": [
+		"routine",
+		"assistance",
+		"module",
+		"federation",
+		"navigation"
+	],
+	"dependencies": {
+		"tslib": "^2.0.0"
+	}
+}

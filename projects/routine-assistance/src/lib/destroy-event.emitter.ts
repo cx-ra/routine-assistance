@@ -1,5 +1,3 @@
-/* eslint-disable rxjs/no-subclass */
-
 import { Injectable, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 

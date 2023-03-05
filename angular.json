@@ -7,7 +7,7 @@
 			"projectType": "library",
 			"root": "projects/routine-assistance",
 			"sourceRoot": "projects/routine-assistance/src",
-			"prefix": "cxra",
+			"prefix": "CXra",
 			"architect": {
 				"build": {
 					"builder": "@angular-devkit/build-angular:ng-packagr",
@@ -30,6 +30,37 @@
 						"main": "projects/routine-assistance/src/test.ts",
 						"tsConfig": "projects/routine-assistance/tsconfig.spec.json",
 						"karmaConfig": "projects/routine-assistance/karma.conf.js"
+					}
+				}
+			}
+		},
+		"module-federation-navigator": {
+			"projectType": "library",
+			"root": "projects/module-navigator",
+			"sourceRoot": "projects/module-navigator/src",
+			"prefix": "CXra",
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-angular:ng-packagr",
+					"options": {
+						"project": "projects/module-navigator/ng-package.json"
+					},
+					"configurations": {
+						"production": {
+							"tsConfig": "projects/module-navigator/tsconfig.lib.prod.json"
+						},
+						"development": {
+							"tsConfig": "projects/module-navigator/tsconfig.lib.json"
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"main": "projects/module-navigator/src/test.ts",
+						"tsConfig": "projects/module-navigator/tsconfig.spec.json",
+						"karmaConfig": "projects/module-navigator/karma.conf.js"
 					}
 				}
 			}

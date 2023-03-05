@@ -8,8 +8,8 @@
 		"inlineSources": true,
 		"types": [],
 		"paths": {
-			"@cxra/routine-assistance": [
-				"projects/routine-assistance/src/public-api.ts"
+			"@cxra/module-federation-navigator": [
+				"projects/module-navigator/src/public-api.ts"
 			]
 		}
 	},
