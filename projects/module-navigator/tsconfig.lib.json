@@ -6,12 +6,7 @@
 		"declaration": true,
 		"declarationMap": true,
 		"inlineSources": true,
-		"types": [],
-		"paths": {
-			"@cxra/module-federation-navigator": [
-				"projects/module-navigator/src/public-api.ts"
-			]
-		}
+		"types": []
 	},
 	"exclude": [
 		"src/test.ts",

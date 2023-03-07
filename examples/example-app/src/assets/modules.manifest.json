@@ -1,0 +1,70 @@
+{
+	"module-a": {
+		"on": true,
+		"type": "module",
+		"remoteEntry": "http://localhost:3000/remoteEntry.js",
+		"remoteName": "module-a",
+		"exposedModule": "./Module",
+		"elementName": "AppModule",
+		"navigation": {
+			"route": {
+				"path": "module-a"
+			},
+			"component": {
+				"type": "ModuleANavComponent",
+				"remoteEntry": "http://localhost:3000/remoteEntry.js",
+				"exposedModule": "./Component"
+			},
+			"options": "ModuleANavComponentOptions"
+		}
+	},
+	"module-b": {
+		"on": true,
+		"type": "module",
+		"remoteEntry": "http://localhost:3001/remoteEntry.js",
+		"remoteName": "module-b",
+		"exposedModule": "./Module",
+		"elementName": "AppModule",
+		"navigation": {
+			"route": {
+				"path": "module-b"
+			},
+			"component": {
+				"type": "ModuleBNavComponent",
+				"remoteEntry": "http://localhost:3001/remoteEntry.js",
+				"exposedModule": "./Component"
+			},
+			"options": "ModuleBNavComponentOptions"
+		}
+	},
+	"react-a": {
+		"on": true,
+		"type": "script",
+		"remoteEntry": "https://witty-wave-0a695f710.azurestaticapps.net/remoteEntry.js",
+		"remoteName": "react",
+		"exposedModule": "./web-components",
+		"elementName": "react-element",
+		"navigation": {
+			"route": {
+				"path": "react-a"
+			},
+			"component": "<span>to <b>reAct-A</b></span>",
+			"order": 4
+		}
+	},
+	"react-b": {
+		"on": true,
+		"type": "script",
+		"remoteEntry": "https://witty-wave-0a695f710.azurestaticapps.net/remoteEntry.js",
+		"remoteName": "react",
+		"exposedModule": "./web-components",
+		"elementName": "react-element",
+		"navigation": {
+			"route": {
+				"path": "react-b"
+			},
+			"component": "<span>to <b>reAct-B</b></span>",
+			"order": 4
+		}
+	}
+}

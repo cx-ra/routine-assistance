@@ -7,7 +7,7 @@ import { cxra } from './lib.d';
 import { CXraModuleNavigatorManifest } from './navigator.manifest';
 
 export const CXRA_MODULE_NAVIGATOR_OPTIONS = new InjectionToken<Partial<cxra.module.federation.navigation.navigator.Options>>(
-	'cxra Module navigator behavior options'
+	'CXRA Module navigator behavior options'
 );
 
 @Injectable({ providedIn: 'root' })
@@ -29,7 +29,10 @@ export class CXraModuleNavigator extends CXraDestroyEventEmitter {
 				: of(_item)
 			)
 		)),
-		map(_items => _items.filter(_item => _item !== false)),
+		map(_items => _items
+			.filter(_item => _item !== false)
+			.map(_item => _item as cxra.navigation.item.Definition<unknown>)
+		),
 		shareReplay({ bufferSize: 1, refCount: false }),
 		takeUntil(this)
 	);

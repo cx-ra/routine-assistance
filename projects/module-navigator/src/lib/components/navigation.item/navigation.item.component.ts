@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
-import { CXraDestroyEventEmitter } from '@cxra/routine-assistance';
+import { CXraDestroyEventEmitter, ShouldByDefined } from '@cxra/routine-assistance';
 import { combineLatest, Observable, ReplaySubject } from 'rxjs';
 import { filter, map, shareReplay, startWith, takeUntil } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
@@ -22,7 +22,8 @@ export class CXraNavigationItemComponent<TEvent> implements AfterViewInit {
 	private _content: ViewContainerRef;
 
 	@Input('source')
-	private set _source(value: cxra.navigation.item.Definition<TEvent>) {
+	@ShouldByDefined()
+	public set source(value: cxra.navigation.item.Definition<TEvent>) {
 		this._source$.next(value);
 	}
 

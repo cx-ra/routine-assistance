@@ -1,0 +1,43 @@
+:host ::ng-deep {
+
+	ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+		background-color: #333;
+
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+	}
+
+	li,
+	cxra-ni {
+		float: left;
+		height: 86px;
+		margin-top: auto;
+		margin-bottom: auto;
+	}
+
+	li a,
+	cxra-ni a {
+		display: block;
+		color: white;
+		text-align: center;
+		padding: 34px 28px;
+		text-decoration: none;
+		cursor: pointer;
+	}
+
+	li a:hover,
+	cxra-ni a:hover {
+		background-color: #111;
+	}
+
+	li img {
+		margin-top: 4px;
+	}
+	
+}

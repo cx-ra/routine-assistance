@@ -1,0 +1,8 @@
+<ul>
+	<li><img src="../assets/brave-cookie.webp" width="84"></li>
+	<li><a routerLink="/">Home</a></li>
+	<cxra-ni [source]="nav" *ngFor="let nav of (navigator.navigation$ | async)"></cxra-ni>
+</ul>
+<section>
+	<router-outlet></router-outlet>
+</section>

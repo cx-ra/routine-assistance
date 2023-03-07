@@ -2,6 +2,10 @@
 	"extends": "./tsconfig.json",
 	"include": [
 		"./projects/routine-assistance/src/**/*",
-		"./projects/module-navigator/src/**/*"
+		"./projects/module-navigator/src/**/*",
+		"./examples/example-context/src/**/*",
+		"./examples/example-module-a/src/**/*",
+		"./examples/example-module-b/src/**/*",
+		"./examples/example-app/src/**/*"
 	]
 }

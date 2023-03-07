@@ -20,10 +20,6 @@
 
 бла-бла-бла...
 
-#### Элемент навигации
-
-В качестве элемента навигации можно указать компонент или шаблон
-
 ### Управление доступностью навигации к модулю, в зависимости от контекста или состояния
 
 бла-бла-бла...
@@ -33,8 +29,8 @@
 ## Настройка репозитория (не требующие выполнения)
 
 * Set local dependencies
-    * routine: ``yarn add file:./dist/cxra/routine``
-    * navigator: ``yarn add file:./dist/cxra/module-federation-navigator``
+    * routine: ``yarn add file:./dist/ngcx/routine``
+    * navigator: ``yarn add file:./dist/ngcx/module-federation-navigator``
 
 ## Первый запуск
 

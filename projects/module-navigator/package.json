@@ -10,7 +10,11 @@
 		"federation",
 		"navigation"
 	],
+	"peerDependencies": {
+		"@angular/common": "^14.2.0",
+		"@angular/core": "^14.2.0"
+	},
 	"dependencies": {
-		"tslib": "^2.0.0"
+		"tslib": "^2.3.0"
 	}
 }

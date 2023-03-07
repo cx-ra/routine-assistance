@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ModuleNavigator } from './module-navigator';
+import { CXraModuleNavigator } from './navigator';
 
 describe('ModuleNavigator', () => {
-	let service: ModuleNavigator;
+	let service: CXraModuleNavigator;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({});
-		service = TestBed.inject(ModuleNavigator);
+		service = TestBed.inject(CXraModuleNavigator);
 	});
 
 	it('should be created', () => {

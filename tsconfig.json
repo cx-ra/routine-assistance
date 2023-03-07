@@ -14,11 +14,19 @@
 		"lib": [
 			"es2018",
 			"dom"
-		]
+		],
+		"paths": {
+			"@cxra/module-federation-navigator": [
+				"projects/module-navigator/src/public-api.ts"
+			],
+			"example-context": [
+				"examples/example-context/src/public-api.ts"
+			]
+		}
 	},
 	"angularCompilerOptions": {
-	  "strictInjectionParameters": true,
-	  "strictInputAccessModifiers": true,
-	  "strictTemplates": true
+		"strictInjectionParameters": true,
+		"strictInputAccessModifiers": true,
+		"strictTemplates": true
 	}
 }
