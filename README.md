@@ -1,3 +1,7 @@
+# @cxra/routine-assistance
+
+# @cxra/angular-assistance
+
 # @cxra/module-federation-navigator
 
 Данная библиотека, предназначена:
@@ -11,10 +15,13 @@
 
 ## Примеры использования
 
-В данном репозитории приведены примеры приложения использующего данный подход:
-* _projects\example-module-a_
-* _projects\example-module-b_
-* _projects\example-app_ 
+В данном репозитории приведены примеры приложения использующего данный подход.
+Описание | Проект
+--- | ---
+Контекст. Пример проекта используемого для публикации и обработки данных используемых между разными модулями. | examples\example-context
+Модуль A. С примером отключения навигации модуля из самого себя. | examples\example-module-a
+Модуль Б. С примером инкапсуляции внутренних стилей и данных внешнего контекста. | examples\example-module-b
+Непосредственно приложение публикующее разные модули и навигацию. | examples\example-app
 
 ### Конфигурационный файл
 
@@ -44,7 +51,7 @@
 ## Usage
 * Start all micro-frontend's and app: ``start:example:all``
 
-![let's try example](./projects\example-app\src\assets\brave-cookie.webp)
+![let's try example](./examples\example-app\src\assets\brave-cookie.webp)
 
 ## More
 
