@@ -51,7 +51,7 @@
 ## Usage
 * Start all micro-frontend's and app: ``start:example:all``
 
-![let's try example](./examples\example-app\src\assets\brave-cookie.webp)
+![let's try example](/examples/example-app/src/assets/brave-cookie.webp)
 
 ## More
 
