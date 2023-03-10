@@ -1,12 +1,15 @@
+/* eslint-disable no-useless-computed-key */
+
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { cxra, CXraModuleNavigatorManifest, CXraRemoteModuleNavigatorModule, CXRA_MODULE_NAVIGATOR_OPTIONS } from '@cxra/module-federation-navigator';
+import { cxra, CXraModuleNavigatorManifest, CXraRemoteModuleNavigatorModule, CXRA_MODULE_NAVIGATOR_OPTIONS, CXRA_MODULE_OPTIONS } from '@cxra/module-federation-navigator';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { HomeComponent } from './components/home/home.component';
 import { UnfoundComponent } from './components/unfound/unfound.component';
-import { BehaviorSubject } from 'rxjs';
+import { interval, Observable, of, ReplaySubject } from 'rxjs';
 import { ExampleContextModule } from 'examples/example-context/src/public-api';
+import { first, scan, switchMap, takeWhile } from 'rxjs/operators';
 
 @NgModule({
 	imports: [
@@ -32,17 +35,34 @@ import { ExampleContextModule } from 'examples/example-context/src/public-api';
 			}
 		}
 	}, {
-		provide: 'ModuleBNavComponentOptions',
-		useValue: { 
-			active$: new BehaviorSubject<boolean>(true),
-			order: 3
-		}
+		provide: 'module-a.countdown',
+		useValue: of({ default: 10, iterator: 1 }).pipe(
+			switchMap(_settings => interval(1000).pipe(
+				scan((acc) => acc - _settings.iterator, _settings.default)
+			)),
+			takeWhile(val => val >= 0)
+		)
 	}, {
-		provide: 'ModuleANavComponentOptions', // ModuleANavComponent
-		useValue: { 
-			active$: new BehaviorSubject<boolean>(true),
-			order: 2
-		}
+		provide: 'module-b.activator',
+		useValue: new ReplaySubject<true>()
+	}, {
+		provide: CXRA_MODULE_OPTIONS,
+		useFactory: (countdown$: Observable<number>, activator$: ReplaySubject<true>) => ({
+			['module-a']: {
+				state: new Promise<boolean>((resolve) => {
+					countdown$.pipe(
+						first(value => value === 0)
+					).subscribe(() => resolve(true));
+				})
+			},
+			['module-b']: {
+				state: new Promise<boolean>((resolve) => {
+					activator$.subscribe(() => resolve(true));
+				})
+			}
+		}),
+		deps: ['module-a.countdown', 'module-b.activator'],
+		multi: true
 	}, {
 		// Preload: routes and other internal configurations
 		provide: APP_INITIALIZER,

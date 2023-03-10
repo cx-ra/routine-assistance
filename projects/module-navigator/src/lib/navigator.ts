@@ -1,8 +1,8 @@
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { Router, Routes } from '@angular/router';
 import { CXraDestroyEventEmitter } from '@cxra/routine-assistance';
-import { combineLatest, of } from 'rxjs';
-import { map, shareReplay, switchMap, takeUntil } from 'rxjs/operators';
+import { combineLatest, from } from 'rxjs';
+import { map, shareReplay, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { cxra } from './lib.d';
 import { CXraModuleNavigatorManifest } from './navigator.manifest';
 
@@ -18,19 +18,17 @@ export class CXraModuleNavigator extends CXraDestroyEventEmitter {
 	public readonly navigation$ = this._manifest.definition$.pipe(
 		map(_definition => _definition.navigation),
 		switchMap(_items => combineLatest(
-			_items.map(_item => _item.options?.active$
-				? _item.options.active$.pipe(
-					map(_active => _active
-						? _item
-						: false
-					),
-					takeUntil(this)
-				)
-				: of(_item)
-			)
+			_items.map(_item => from(_item.state).pipe(
+				startWith(false),
+				map(_state => _state
+					? _item
+					: 'inactive'
+				),
+				takeUntil(this)
+			))
 		)),
 		map(_items => _items
-			.filter(_item => _item !== false)
+			.filter(_item => _item !== 'inactive')
 			.map(_item => _item as cxra.navigation.item.Definition<unknown>)
 		),
 		shareReplay({ bufferSize: 1, refCount: false }),

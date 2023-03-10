@@ -6,4 +6,4 @@ export { CXRA_MODULE_NAVIGATOR_OPTIONS, CXraModuleNavigator } from './lib/naviga
 export { buildModuleNavigatorDefinition } from './lib/navigator.definition.builder';
 export { CXraModuleNavigatorManifest } from './lib/navigator.manifest';
 
-export { CXraRemoteModuleNavigatorModule } from './lib/navigator.module';
+export { CXraRemoteModuleNavigatorModule, CXRA_MODULE_OPTIONS } from './lib/navigator.module';

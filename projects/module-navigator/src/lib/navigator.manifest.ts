@@ -27,7 +27,7 @@ export class CXraModuleNavigatorManifest<TModuleConfig extends cxra.module.feder
 			if (Object.keys(_cfg).length < 1) {
 				throw new Error('Module navigator configuration file does not contain meaningful modules');
 			}
-			if (Object.values(_cfg).every(o => !o.on)) {
+			if (Object.values(_cfg).every(o => !o.state)) {
 				throw new Error('Module navigator configuration file does not contain turned on modules');
 			}
 			return _cfg;

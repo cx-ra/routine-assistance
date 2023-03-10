@@ -3,7 +3,6 @@
 import { LoadRemoteEntryScriptOptions, LoadRemoteModuleEsmOptions, LoadRemoteModuleOptions, RemoteConfig } from '@angular-architects/module-federation';
 import { WebComponentWrapperOptions } from '@angular-architects/module-federation-tools';
 import { ComponentType } from '@angular/cdk/portal';
-import { KeyValue } from '@angular/common';
 import { Route } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -33,27 +32,26 @@ export namespace cxra {
 
 		export namespace item {
 
-			export interface Options<TEvent> {
-				/** Navigation element events. */
-				readonly events$: Observable<Array<TEvent>>;
-				readonly title: string;
-				readonly order: number;
-				/** Flag that the element can disappear depending on some events. */
-				active$: Observable<boolean>;
-			}
-
 			/**
 			 * Schematic of the navigation element.
 			 * @example
 			 * 		...
 			 */
-			interface IScheme<TComponentDefinition, TEvent, TOptionsDefinition extends (Partial<Options<TEvent>> | StringToken)> {
+			interface IScheme<TComponentDefinition> {
 				readonly route: IRoute;
 				readonly component: TComponentDefinition;
-				readonly options?: TOptionsDefinition;
+				readonly order?: number;
 			}
 			
-			export type Definition<TEvent> = IScheme<Promise<ComponentType<unknown> | HTML>, TEvent, Partial<Options<TEvent>>>;
+			export type Definition<TEvent> = IScheme<Promise<ComponentType<unknown> | HTML>> & {
+				readonly state: Promise<boolean>;
+				/** Navigation element events. */
+				readonly events: Observable<Array<TEvent>>;
+			};
+
+			export interface OptionsNew<TEvent> {
+				[module: string]: Pick<Definition<TEvent>, 'state'> & Pick<Definition<TEvent>, 'events'>;
+			}
 
 		}
 
@@ -65,12 +63,11 @@ export namespace cxra {
 
 		export namespace item {
 
-			export type Definition = cxra.navigation.item.IScheme<RemoteComponentEsmOptions | HTML, unknown, StringToken>;
-
-			/** Description of rule the navigation element for publishing in DI. */
-			export type ComponentOptions = KeyValue<ComponentType<unknown>, cxra.navigation.item.Options<unknown>>;
+			export type Definition = cxra.navigation.item.IScheme<RemoteComponentEsmOptions | HTML>;
 
 		}
+
+		export type RemoteModuleState = 'on' | 'off' | 'promise';
 		
 		export type NavigableRemoteModuleConfig = 
 			RemoteConfig & {
@@ -79,7 +76,7 @@ export namespace cxra {
 			Pick<LoadRemoteModuleOptions, 'exposedModule'> &
 			Pick<LoadRemoteEntryScriptOptions, 'remoteName'> &
 			Pick<WebComponentWrapperOptions, 'elementName'> & {
-				on: boolean;
+				state: RemoteModuleState;
 			};
 
 		export namespace navigator {

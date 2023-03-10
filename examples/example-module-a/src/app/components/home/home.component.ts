@@ -1,5 +1,5 @@
-import { Component, ChangeDetectionStrategy, Inject } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Component, ChangeDetectionStrategy, Inject, Optional } from '@angular/core';
+import { ReplaySubject } from 'rxjs';
 
 @Component({
 	selector: 'module-a-home',
@@ -9,14 +9,13 @@ import { BehaviorSubject } from 'rxjs';
 export class HomeComponent {
 	
 	constructor(
-		@Inject('ModuleANavComponentOptions')
-		private readonly _moduleBNavComponentOptions: { 
-			active$: BehaviorSubject<boolean>;
-		}
+		@Optional()
+		@Inject('module-b.activator')
+		private readonly _moduleBActivator: ReplaySubject<true>
 	) { }
 
 	public switch(): void {
-		this._moduleBNavComponentOptions.active$.next(!this._moduleBNavComponentOptions.active$.value);
+		this._moduleBActivator?.next(true);
 	}
 
 }

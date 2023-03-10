@@ -1,6 +1,6 @@
 {
 	"module-a": {
-		"on": true,
+		"state": "promise",
 		"type": "module",
 		"remoteEntry": "http://localhost:3000/remoteEntry.js",
 		"remoteName": "module-a",
@@ -14,12 +14,11 @@
 				"type": "ModuleANavComponent",
 				"remoteEntry": "http://localhost:3000/remoteEntry.js",
 				"exposedModule": "./Component"
-			},
-			"options": "ModuleANavComponentOptions"
+			}
 		}
 	},
 	"module-b": {
-		"on": true,
+		"state": "promise",
 		"type": "module",
 		"remoteEntry": "http://localhost:3001/remoteEntry.js",
 		"remoteName": "module-b",
@@ -33,12 +32,11 @@
 				"type": "ModuleBNavComponent",
 				"remoteEntry": "http://localhost:3001/remoteEntry.js",
 				"exposedModule": "./Component"
-			},
-			"options": "ModuleBNavComponentOptions"
+			}
 		}
 	},
 	"react-a": {
-		"on": true,
+		"state": "on",
 		"type": "script",
 		"remoteEntry": "https://witty-wave-0a695f710.azurestaticapps.net/remoteEntry.js",
 		"remoteName": "react",
@@ -53,7 +51,7 @@
 		}
 	},
 	"react-b": {
-		"on": true,
+		"state": "on",
 		"type": "script",
 		"remoteEntry": "https://witty-wave-0a695f710.azurestaticapps.net/remoteEntry.js",
 		"remoteName": "react",

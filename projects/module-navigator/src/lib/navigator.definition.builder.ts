@@ -1,8 +1,11 @@
 import { loadRemoteModule, LoadRemoteModuleEsmOptions } from '@angular-architects/module-federation';
 import { WebComponentWrapper, WebComponentWrapperOptions } from '@angular-architects/module-federation-tools';
 import { ComponentType } from '@angular/cdk/portal';
+import { KeyValue } from '@angular/common';
 import { Injector } from '@angular/core';
 import { Route } from '@angular/router';
+import { CXRA_MODULE_OPTIONS } from './navigator.module';
+import { Subject } from 'rxjs';
 import { cxra } from './lib.d';
 
 function toRoute<TModuleConfig extends cxra.module.federation.navigation.NavigableRemoteModuleConfig>(
@@ -70,21 +73,14 @@ function toComponentDefinition(
 }
 
 function toNavigationDefinition<TEvent>(
-	_definition: cxra.module.federation.navigation.item.Definition,
-	_injector: Injector
+	_state: Promise<boolean>,
+	_definition: cxra.module.federation.navigation.item.Definition
 ): cxra.navigation.item.Definition<TEvent> {
-	let _options: Partial<cxra.navigation.item.Options<TEvent>>;
-	try {
-		_options = _definition.options
-			? _injector.get(_definition.options, undefined)
-			: undefined;
-	} catch {
-		_options = undefined;
-	}
 	return {
+		state: _state,
 		route: _definition.route,
 		component: toComponentDefinition(_definition.component),
-		options: _options
+		events: new Subject<Array<TEvent>>()
 	};
 }
 
@@ -95,14 +91,29 @@ export function buildModuleNavigatorDefinition<TModuleConfig extends cxra.module
 ): cxra.module.federation.navigation.navigator.Definition {
 	const modules = Object
 		.keys(cfg)
-		.map<cxra.module.federation.navigation.NavigableRemoteModuleConfig>(_section => cfg[_section])
-		.filter(_definition => _definition.on);
+		.map<KeyValue<string, cxra.module.federation.navigation.NavigableRemoteModuleConfig>>(_section => ({ key: _section, value: cfg[_section] }));
+	const options = _injector
+		.get<Array<cxra.navigation.item.OptionsNew<unknown>>>(CXRA_MODULE_OPTIONS)
+		.reduce((accumulator, i) => Object.assign(accumulator, i), {});
 	return ({
-		routes: modules.map<Route>(_definition => toRoute(_definition)),
+		routes: modules
+			.filter(_definition => _definition.value.state !== 'off')
+			.map<Route>(_definition => toRoute(_definition.value)),
 		navigation: modules
-			.map(_definition => _definition.navigation)
-			.filter(_route => typeof _route === 'object')
-			.map((_definition: cxra.module.federation.navigation.item.Definition) => toNavigationDefinition<unknown>(_definition, _injector))
-			.sort((a, b) => a.options?.order - b.options?.order)
+			// Обрабатываем модули для которых задано описание навигации, а не только маршрут перехода
+			.filter(_definition => typeof _definition.value.navigation === 'object')
+			.map(_definition => toNavigationDefinition<unknown>(
+				_definition.value.state === 'promise' && Object.isD(options[_definition.key]?.state)
+					? options[_definition.key].state
+					: new Promise<boolean>((resolve) => {
+						resolve(
+							_definition.value.state === 'on'
+								? true
+								: false
+						);
+					}),
+				_definition.value.navigation as cxra.module.federation.navigation.item.Definition
+			))
+			.sort((a, b) => a.order - b.order)
 	});
 }
