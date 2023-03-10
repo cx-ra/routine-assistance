@@ -14,8 +14,6 @@ export namespace cxra {
 	 */
 	export type ComponentTypeName = string;
 
-	export type StringToken = string;
-
 	/**
 	 * Alias for html template.
 	 * TODO: remove to `routine`
@@ -49,8 +47,8 @@ export namespace cxra {
 				readonly events: Observable<Array<TEvent>>;
 			};
 
-			export interface OptionsNew<TEvent> {
-				[module: string]: Pick<Definition<TEvent>, 'state'> & Pick<Definition<TEvent>, 'events'>;
+			export interface Options<TEvent> {
+				[module: string]: Pick<Definition<TEvent>, 'state'>;
 			}
 
 		}

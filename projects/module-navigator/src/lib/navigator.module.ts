@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { cxra } from './lib';
 import { CXraNavigationItemComponent } from './components/navigation.item/navigation.item.component';
 
-class ModuleOptionsInjectionToken extends InjectionToken<cxra.navigation.item.OptionsNew<unknown>> {
+class ModuleOptionsInjectionToken extends InjectionToken<cxra.navigation.item.Options<unknown>> {
 	
 	constructor() {
 		super('CXra. Remote module navigation options.');

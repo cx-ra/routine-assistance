@@ -93,7 +93,7 @@ export function buildModuleNavigatorDefinition<TModuleConfig extends cxra.module
 		.keys(cfg)
 		.map<KeyValue<string, cxra.module.federation.navigation.NavigableRemoteModuleConfig>>(_section => ({ key: _section, value: cfg[_section] }));
 	const options = _injector
-		.get<Array<cxra.navigation.item.OptionsNew<unknown>>>(CXRA_MODULE_OPTIONS)
+		.get<Array<cxra.navigation.item.Options<unknown>>>(CXRA_MODULE_OPTIONS)
 		.reduce((accumulator, i) => Object.assign(accumulator, i), {});
 	return ({
 		routes: modules
