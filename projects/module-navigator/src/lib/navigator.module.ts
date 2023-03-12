@@ -3,6 +3,7 @@ import { InjectionToken, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { cxra } from './lib';
 import { CXraNavigationItemComponent } from './components/navigation.item/navigation.item.component';
+import { CXraNavigationBadgeComponent } from './components/navigation.badge/navigation.badge.component';
 
 class ModuleOptionsInjectionToken extends InjectionToken<cxra.navigation.item.Options<unknown>> {
 	
@@ -12,7 +13,8 @@ class ModuleOptionsInjectionToken extends InjectionToken<cxra.navigation.item.Op
 }
 
 const COMPONENTS = [
-	CXraNavigationItemComponent
+	CXraNavigationItemComponent,
+	CXraNavigationBadgeComponent
 ];
 
 @NgModule({

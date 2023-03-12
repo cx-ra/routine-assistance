@@ -19,14 +19,29 @@
 		height: 86px;
 		margin-top: auto;
 		margin-bottom: auto;
+		
+		img {
+			margin-top: 4px;
+		}
+
+		cxra-nb {
+			background-color: #fa3e3e;
+			border-radius: 18px;
+			color: white;
+			font-size: 10px;
+			min-width: 10px;
+			height: 10px;
+			padding: 2px 3px 3px 2px;
+		}
 	}
 
 	li a,
 	cxra-ni a {
+		position: relative;
 		display: block;
 		color: white;
 		text-align: center;
-		padding: 34px 28px;
+		margin: 34px 28px;
 		text-decoration: none;
 		cursor: pointer;
 	}
@@ -34,10 +49,6 @@
 	li a:hover,
 	cxra-ni a:hover {
 		background-color: #111;
-	}
-
-	li img {
-		margin-top: 4px;
 	}
 	
 }

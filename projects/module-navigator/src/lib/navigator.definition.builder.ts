@@ -5,7 +5,7 @@ import { KeyValue } from '@angular/common';
 import { Injector } from '@angular/core';
 import { Route } from '@angular/router';
 import { CXRA_MODULE_OPTIONS } from './navigator.module';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { cxra } from './lib.d';
 
 function toRoute<TModuleConfig extends cxra.module.federation.navigation.NavigableRemoteModuleConfig>(
@@ -74,13 +74,14 @@ function toComponentDefinition(
 
 function toNavigationDefinition<TEvent>(
 	_state: Promise<boolean>,
-	_definition: cxra.module.federation.navigation.item.Definition
+	_definition: cxra.module.federation.navigation.item.Definition,
+	_events: Observable<Array<TEvent>>
 ): cxra.navigation.item.Definition<TEvent> {
 	return {
 		state: _state,
 		route: _definition.route,
 		component: toComponentDefinition(_definition.component),
-		events: new Subject<Array<TEvent>>()
+		events: _events
 	};
 }
 
@@ -112,7 +113,10 @@ export function buildModuleNavigatorDefinition<TModuleConfig extends cxra.module
 								: false
 						);
 					}),
-				_definition.value.navigation as cxra.module.federation.navigation.item.Definition
+				_definition.value.navigation as cxra.module.federation.navigation.item.Definition,
+				Object.isD(options[_definition.key]?.events)
+					? options[_definition.key].events
+					: new Subject<Array<unknown>>()
 			))
 			.sort((a, b) => a.order - b.order)
 	});

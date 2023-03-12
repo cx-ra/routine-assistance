@@ -1,6 +1,7 @@
 export { cxra } from './lib/lib';
 
 export { CXraNavigationItemComponent } from './lib/components/navigation.item/navigation.item.component';
+export { CXraNavigationBadgeComponent } from './lib/components/navigation.badge/navigation.badge.component';
 
 export { CXRA_MODULE_NAVIGATOR_OPTIONS, CXraModuleNavigator } from './lib/navigator';
 export { buildModuleNavigatorDefinition } from './lib/navigator.definition.builder';

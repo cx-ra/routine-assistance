@@ -7,7 +7,7 @@ import { cxra, CXraModuleNavigatorManifest, CXraRemoteModuleNavigatorModule, CXR
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { HomeComponent } from './components/home/home.component';
 import { UnfoundComponent } from './components/unfound/unfound.component';
-import { interval, Observable, of, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, interval, Observable, of, ReplaySubject } from 'rxjs';
 import { ExampleContextModule } from 'examples/example-context/src/public-api';
 import { first, scan, switchMap, takeWhile } from 'rxjs/operators';
 
@@ -53,7 +53,11 @@ import { first, scan, switchMap, takeWhile } from 'rxjs/operators';
 					countdown$.pipe(
 						first(value => value === 0)
 					).subscribe(() => resolve(true));
-				})
+				}),
+				events: new BehaviorSubject<unknown>([
+					{ message: 'test #1' },
+					{ message: 'test #2' }
+				])
 			},
 			['module-b']: {
 				state: new Promise<boolean>((resolve) => {

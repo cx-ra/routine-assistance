@@ -1,7 +1,11 @@
 <a class="cxra-ni-link" [class.active]="(active$ | async) === true" [routerLink]="link$ | async" [queryParams]="(route$ | async).queries" *ngIf="(route$ | async); else without_routing">
 	<ng-container #content></ng-container>
+	<cxra-nb *ngIf="(notifying$ | async) === true">{{ (events$ | async)?.length }}</cxra-nb>
 </a>
 <!-- We do not use routerLinkActive because it works when the transition along the route has not started, but has ended -->
 <ng-template #without_routing>
-	<a class="cxra-ni-link"><ng-container #content></ng-container></a>
+	<a class="cxra-ni-link">
+		<ng-container #content></ng-container>
+		<cxra-nb *ngIf="(notifying$ | async) === true">{{ (events$ | async)?.length }}</cxra-nb>
+	</a>
 </ng-template>

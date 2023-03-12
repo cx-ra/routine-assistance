@@ -1,8 +1,4 @@
 :host a {
 	position: relative;
 	display: flex;
-	> * {
-		display: flex;
-		align-items: center;
-	}
 }

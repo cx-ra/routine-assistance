@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, R
 import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
 import { CXraDestroyEventEmitter, ShouldByDefined } from '@cxra/routine-assistance';
 import { combineLatest, Observable, ReplaySubject } from 'rxjs';
-import { filter, map, shareReplay, startWith, takeUntil } from 'rxjs/operators';
+import { filter, map, shareReplay, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
 import { cxra } from '../../lib';
 
@@ -63,6 +63,18 @@ export class CXraNavigationItemComponent<TEvent> implements AfterViewInit {
 				? Object.values(_route.params)
 				: []
 		])),
+		takeUntil(this._destroy$),
+		shareReplay({ bufferSize: 1, refCount: false })
+	);
+
+	public readonly events$ = this._source$.pipe(
+		switchMap(o => o.events),
+		takeUntil(this._destroy$),
+		shareReplay({ bufferSize: 1, refCount: false })
+	);
+
+	public readonly notifying$ = this.events$.pipe(
+		map(_events => _events?.length > 0),
 		takeUntil(this._destroy$),
 		shareReplay({ bufferSize: 1, refCount: false })
 	);

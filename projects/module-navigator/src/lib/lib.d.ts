@@ -48,7 +48,7 @@ export namespace cxra {
 			};
 
 			export interface Options<TEvent> {
-				[module: string]: Pick<Definition<TEvent>, 'state'>;
+				[module: string]: Pick<Definition<TEvent>, 'state'> & Pick<Definition<TEvent>, 'events'>;
 			}
 
 		}
