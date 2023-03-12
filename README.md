@@ -1,6 +1,12 @@
 # @cxra/routine-assistance
 
-# @cxra/angular-assistance
+## Pipes
+	
+`isD` checks if the value is defined
+	
+`isND` checks if the value is undefined or null
+	
+`asSanitizedHtml` is meant to be sanitized to declarative html for use in a template
 
 # @cxra/module-federation-navigator
 
