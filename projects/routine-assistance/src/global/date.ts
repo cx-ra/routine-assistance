@@ -50,7 +50,10 @@ Date.HOURS_PER_DAY = 24;
 Date.MINUTES_PER_HOUR = 60;
 Date.SECONDS_PER_MINUTE = 60;
 
-Date.isConcept = (value: unknown) => Object.values(DateConcept).some(o => o === value);
+Date.isConcept = (value: unknown) => Object
+	.values(DateConcept)
+	.some(o => o === value);
+	
 Date.getConceptValue = (value: DateConcept) => {
 	switch (value) {
 		case DateConcept.age:
